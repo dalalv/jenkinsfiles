@@ -1,0 +1,9 @@
+// Orig Ref From :: https://documentation.cloudbees.com/docs/cookbook/_setting_up_a_basic_build_pipeline_with_jenkins.html
+// Look for flow.groovy in same path
+def flow
+node('master') {
+    git branch: 'master', changelog: false, poll: true, url: 'https://github.com/lavaliere/workflow-plugin-pipeline-demo.git'
+    flow = load 'flow.groovy'
+    flow.devQAStaging()
+}
+flow.production()
